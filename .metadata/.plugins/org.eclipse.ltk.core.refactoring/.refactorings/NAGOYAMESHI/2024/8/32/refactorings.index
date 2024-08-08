@@ -3,3 +3,5 @@
 1722845577761	要素を削除
 1722846191126	要素を削除
 1723100679432	型名 'HoidayRepository' を変更します
+1723108951085	リソース 'application.properties' の名前変更
+1723109097395	リソース 'application=production.properties' の名前変更

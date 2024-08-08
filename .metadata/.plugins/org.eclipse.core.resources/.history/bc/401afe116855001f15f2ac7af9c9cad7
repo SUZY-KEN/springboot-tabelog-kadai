@@ -31,11 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-#======== 前略 ========
-
-### VS Code ###
-.vscode/
-
- /src/main/resources/application-development.properties
-
