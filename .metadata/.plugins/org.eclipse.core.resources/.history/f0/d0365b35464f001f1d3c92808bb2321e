@@ -1,7 +1,0 @@
-const stripe = Stripe('pk_test_51PaX7XCj3ORFf5wgQ0G39TjDGKfJEqM4aiABVKDZfMsuvj5Ko97jSosXhHdK3VtuRoJfPBll7TA6DFcRuGLkzZLC00fdXTFt6R');
-
-const appearance = { /* appearance */ };
-const options = { /* options */ };
-const elements = stripe.elements({ clientSecret, appearance });
-const paymentElement = elements.create('payment', options);
-paymentElement.mount('#payment-element');
