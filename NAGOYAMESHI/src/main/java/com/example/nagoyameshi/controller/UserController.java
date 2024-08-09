@@ -54,7 +54,7 @@ public class UserController {
 	{
 		if(bindingResult.hasErrors())
 		{
-			return "/user/edit";
+			return "user/edit";
 		}
 		
 		Users user=userRepository.getReferenceById(userDetailsImpl.getUser().getId());

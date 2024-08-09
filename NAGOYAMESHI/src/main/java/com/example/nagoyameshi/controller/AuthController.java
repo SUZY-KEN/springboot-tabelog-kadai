@@ -70,7 +70,7 @@ public class AuthController {
 		 
 		 if(bindingResult.hasErrors())
 		 {
-			 return "/auth/signup";
+			 return "auth/signup";
 		 }
 		 
 		 System.out.println("signupPOST:SUCCESS");
@@ -84,7 +84,7 @@ public class AuthController {
          
 		 redirectAttributes.addFlashAttribute("successMessage","ご入力いただいたメールアドレスに認証メールを送信しました。メールに記載されているリンクをクリックし、会員登録を完了してください。");
 		 
-		 return "redirect:/";
+		 return "redirect:";
 	 }
 	 
 	 
@@ -104,7 +104,7 @@ public class AuthController {
              model.addAttribute("errorMessage", errorMessage);
          }
          
-         return "/auth/verify";         
+         return "auth/verify";         
      }    
 	 
 }

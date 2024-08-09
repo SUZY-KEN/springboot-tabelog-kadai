@@ -76,7 +76,7 @@ public class AdminUserController {
 		model.addAttribute("userListForm",new UserCSVForm());
 		model.addAttribute("userPage",userPage);
 		model.addAttribute("myUser",myUser);
-		return "/user/admin/show";
+		return "user/admin/show";
 	}
 
 	@GetMapping("/authorize")

@@ -153,7 +153,7 @@ public class AdminCategoryController {
 			model.addAttribute("restaurantList",categoryService.confirm(category));
 			model.addAttribute("category",category);
 			
-			return "/adminCategory/confirm";
+			return "adminCategory/confirm";
 		}
 		
 		redirectAttributes.addFlashAttribute("successMessage",category.getName()+"を削除しました");

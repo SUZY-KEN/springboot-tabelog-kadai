@@ -59,14 +59,10 @@ public class RestaurantController {
 			@RequestParam(name="category",required=false)Integer category,@RequestParam(name="price",required=false)Integer price,
 			@PageableDefault(page=0,size=12,sort="id",direction = Direction.ASC)Pageable pageable,Model model) 
 	{
-		System.out.println("RestaurantController.indexメソッド");
+		
 
 		
 		Page<Restaurants>restaurantsPage;
-		
-
-		
-
 		
 
 		
@@ -153,7 +149,7 @@ public class RestaurantController {
 			}
 		}	
 		
-		System.out.println("restaurantsPage:"+restaurantsPage);
+		
 		
 		model.addAttribute("restaurantsPage",restaurantsPage);
 		model.addAttribute("nameKeyword",nameKeyword);
@@ -162,7 +158,7 @@ public class RestaurantController {
 		
 		
 		model.addAttribute("restaurantCsvForm",new RestaurantCSVForm());
-		return "/restaurants/index";
+		return "restaurants/index";
 	}
 	
 	
@@ -194,16 +190,22 @@ public class RestaurantController {
              System.out.println("is:success");
              
          }
-         List<Review> newReviews =reviewRepository.findTop6ByRestaurantsAndEnabledOrderByCreatedAtDesc(restaurant,true) ;
+         List<Review> newReviews =reviewRepository.findTop6ByRestaurantsAndEnabledOrderByCreatedAtDesc(restaurant,true);
+         System.out.println("newReviewInstance:success");
          long totalReviewCount=reviewRepository.countByRestaurantsAndEnabled(restaurant,true);
          
+         System.out.println("reviewCountInstance:success");
+         System.out.println(holidayRepository.findByRestaurantId(restaurant));
          Holiday holiday=holidayRepository.findByRestaurantId(restaurant);
         
-        
+         System.out.println("holidayInstance:success");
          
          model.addAttribute("holiday",holiday);
+         System.out.println("holidaymodel:success");
          model.addAttribute("restaurants",restaurant);
+         System.out.println("restaurantmodel:success");
          model.addAttribute("reservationForm",new ReservationForm());
+         System.out.println("reservationFormmodel:success");
          model.addAttribute("hasUserAlreadyReviewed", hasUserAlreadyReviewed);
          model.addAttribute("isFavoriteRestaurant", isFavoriteRestaurant);
          model.addAttribute("favorite",favorite);

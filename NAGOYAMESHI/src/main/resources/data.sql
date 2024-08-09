@@ -55,24 +55,24 @@ insert ignore into restaurants(id,name,price,category_id,description,address,cap
 insert ignore into restaurants(id,name,price,category_id,description,address,capacity) values (18,"まずまず食堂",1000,1,"まずまずのラーメン提供します。","愛知県北名古屋市",2);
 
 --定休日情報
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (1,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (2,true,true,true,true,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (3,true,true,false,false,false,true,true);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (4,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (5,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (6,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (7,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (8,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (9,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (10,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (11,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (12,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (13,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (14,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (15,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (16,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (17,false,false,false,false,false,false,false);
-insert ignore into holiday(restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (18,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (1,1,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (2,2,true,true,true,true,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (3,3,true,true,false,false,false,true,true);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (4,4,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (5,5,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (6,6,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (7,7,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (8,8,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (9,9,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (10,10,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (11,11,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (12,12,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (13,13,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (14,14,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (15,15,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (16,16,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (17,17,false,false,false,false,false,false,false);
+insert ignore into holiday(id,restaurant_id,mon,tue,wed,thr,fri,sat,sun) values (18,18,false,false,false,false,false,false,false);
 
 
 -- roles

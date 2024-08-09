@@ -89,7 +89,7 @@ public class ReviewController {
 		if(bindingResult.hasErrors())
 		{
 			model.addAttribute("restaurant",restaurant);
-			return "/review/create";
+			return "review/create";
 		}
 		
 		System.out.println("register:success");
@@ -131,7 +131,7 @@ public class ReviewController {
 		{
 			model.addAttribute("restaurant",restaurant);
 			model.addAttribute("review",review);
-			return "/review/edit";
+			return "review/edit";
 		}
 		
 		

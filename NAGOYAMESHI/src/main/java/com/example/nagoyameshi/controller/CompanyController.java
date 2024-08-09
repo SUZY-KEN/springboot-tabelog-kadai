@@ -30,11 +30,10 @@ public class CompanyController {
 	@GetMapping("/company")
 	public String show(Model model)
 	{
-		Company company=companyRepository.getById(1);
+		Company company=companyRepository.getReferenceById(1);
 		
 		model.addAttribute("company",company);
-		System.out.println("CompanyController.showメソッド");
-		return "/companies/show"; 
+		return "companies/show"; 
 	}
 	
 	@GetMapping("/company/admin/edit")
@@ -69,7 +68,7 @@ public class CompanyController {
 		
 		if(bindingResult.hasErrors())
 		{
-			return "/companies/admin/edit";
+			return "companies/admin/edit";
 		}
 		
 		
