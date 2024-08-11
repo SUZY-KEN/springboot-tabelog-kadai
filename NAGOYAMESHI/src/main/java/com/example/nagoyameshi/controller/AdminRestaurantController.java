@@ -113,8 +113,11 @@ public class AdminRestaurantController {
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable (name="id")Integer id,Model model)
 	{
+		System.out.print("edit");
 		Restaurants restaurant=restaurantRepository.getReferenceById(id);
+		System.out.print("restaurantInstance:"+restaurant);
 		Holiday holiday=holidayRepository.findByRestaurantId(restaurant);
+		System.out.print("holidayInstance:"+holiday);
 		
 		Integer categoryId=null;
 		if(restaurant.getCategory()!=null)
@@ -135,14 +138,14 @@ public class AdminRestaurantController {
 			holiday.getWednesday(),holiday.getThursday(),holiday.getFriday(),holiday.getSaturday(),holiday.getSunday());
 	
 		
-		
+		System.out.print("restaurantEditFormInstance:"+restaurantEditForm);
 		
 		model.addAttribute("restaurant",restaurant);
 		model.addAttribute("restaurantEditForm",restaurantEditForm);
 		model.addAttribute("categoryList",categoryRepository.findAll());
 		System.out.println("edit:success");
 		
-		return "/restaurants/admin/edit";
+		return "restaurants/admin/edit";
 		
 	}
 	

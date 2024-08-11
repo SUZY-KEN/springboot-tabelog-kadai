@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+ <html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">    
+     <head>
+         <div th:replace="~{fragment :: meta}"></div>   
+              
+         <div th:replace="~{fragment :: styles}"></div>
+           
+         <title>会員管理</title>   
+     </head>
+     <body>
+         <div class="nagoyameshi-wrapper">
+             <!-- ヘッダー -->
+             <div th:replace="~{fragment :: header}"></div>
+             
+             <main>
+                 <div class="container samuraitravel-container pb-5">
+                     <div class="row justify-content-center">
+                         <div class="col-xxl-9 col-xl-10 col-lg-11">
+                             <nav class="mb-3" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                                 <ol class="breadcrumb mb-0"> 
+                                     <li class="breadcrumb-item"><a th:href="@{/}">ホーム</a></li>  
+									                   
+                                     <li class="breadcrumb-item active" aria-current="page">会員管理</li>
+                                 </ol>
+                             </nav> 
+                             
+                             <h1 class="mb-3 text-center">会員管理</h1>  
+             
+							 <div th:if="${successMessage}" class="alert alert-info">
+				 				<span th:text="${successMessage}"></span>
+				 		 	  </div>
+							  
+							  
+				  	
+							  <div class="d-flex justify-content-between flex-wrap mb-4">
+								<!--会員検索-->
+								<form method="get" th:action="@{/admin/user/show}">
+									<div class="input-group">
+										<input class="form-control" type="text"name="keyword" th:value="${keyword}"  placeholder="メールアドレスのキーワード">
+										<button type="submit" class="btn text-white shadow-sm nagoyameshi-btn " >検索</button>
+									</div>
+								</form>
+								
+								<!--全ページ会員情報出力-->
+								 <form  method="post" th:action="@{/admin/user/download}" th:object="${userListForm}">
+									<div th:each="user:${userPage}">
+										<input type="hidden" name="userId" th:value="${user.getId()}" >
+									</div>
+									<button type="submit" class="btn text-white shadow-sm nagoyameshi-btn">会員情報ページ出力</button>
+								 </form>
+							  </div>
+							  
+					
+						
+						<!--会員なし-->
+							 <div th:if="${userPage.isEmpty()}" class="row justify-content-center" th:text="ユーザーがいません"> </div>
+							
+						<!--会員情報-->
+							<table class="table"  th:unless="${userPage.isEmpty()}">
+	                           <thead>
+	                               <tr>                            
+	                                   <th scope="col">氏名</th>
+	                                   <th scope="col">メールアドレス</th>
+	                                 
+	                                   <th scope="col">会員</th>
+									   <th scope="col">管理者権限</th>
+									   <th scope="col">会員情報取得</th>
+									   <th></th>
+	                                                                   
+	                               </tr>
+	                           </thead>   
+	                           <tbody>                                                    
+	                               <tr th:each="user : ${userPage}">
+	                                   <td th:text="${user.getName()}"> </td>
+	                                   <td th:text="${user.getEmail()}"></td>
+	                                  
+	                                   <td>
+											<span th:if="${user.getRole().getName().equals('ROLE_GENERAL')}" th:text="無料会員"></span>
+											<span th:if="${user.getRole().getName().equals('ROLE_MEMBERSHIP')}" th:text="有料会員"></span>
+											<span th:if="${user.getRole().getName().equals('ROLE_ADMIN')}" th:text="管理者"></span>
+									   </td>
+									   
+									   <td>
+											<span th:if="${user.getRole().getName().equals('ROLE_MEMBERSHIP')}">
+												<form method="get" th:action="@{/admin/user/authorize}">
+													<input type="hidden"name="id" th:value="${user.getId()}">
+													<div class="form-group d-flex justify-content-center my-4">
+														<button type="submit" class="btn text-white shadow-sm nagoyameshi-btn" >付与</button>
+													</div>
+												</form>
+											</span>
+											
+											<span th:if="${user.getRole().getName().equals('ROLE_ADMIN')&&user!=myUser}">
+												<form method="get" th:action="@{/admin/user/delete}">
+													<input type="hidden"name="id" th:value="${user.getId()}">
+													<div class="form-group d-flex justify-content-center my-4">
+														<button class="btn text-white shadow-sm nagoyameshi-btn"  type="submit" >剥奪</button>
+													</div>
+												</form>
+											</span>
+									   </td>
+									   		
+									   <td>
+										<form method="post" th:action="@{/admin/user/download}" th:object="${userListForm}">
+										
+											<input type="hidden" name="userId" th:value="${user.getId()}" >
+											<div class="form-group d-flex justify-content-center my-4">
+												<button class="btn text-white shadow-sm nagoyameshi-btn" type="submit" >出力</button>
+											</div>
+										 </form>
+									   </td>
+	                              
+	                               </tr>                                    
+	                           </tbody>
+	                       </table>                 
+      
+                            <!-- ページネーション -->
+	                         <div th:if="${userPage.getTotalPages()>1}" class="d-flex justify-content-center">
+	                             <nav aria-label="予約一覧ページ">
+	                                 <ul class="pagination">
+	                                     <li class="page-item">
+	                                         <span th:if="${userPage.isFirst()}" class="page-link disabled">前</span>
+	                                         <a th:unless="${userPage.isFirst()}" th:href="@{/admin/user(page = ${userPage.getNumber() - 1})}" class="page-link nagoyameshi-page-link">前</a>
+	                                     </li>
+	                                     <li th:each="i : ${#numbers.sequence(0, userPage.getTotalPages() - 1)}" class="page-item">
+	                                         <span th:if="${i == userPage.getNumber()}" class="page-link active nagoyameshi-active" th:text="${i + 1}"></span>
+	                                         <a th:unless="${i == userPage.getNumber()}" th:href="@{/admin/user(page = ${i})}" class="page-link nagoyameshi-page-link" th:text="${i + 1}"></a>
+	                                     </li>
+	                                     <li class="page-item">                        
+	                                         <span th:if="${userPage.isLast()}" class="page-link disabled">次</span>
+	                                         <a th:unless="${userPage.isLast()}" th:href="@{/admin/user(page = ${userPage.getNumber() + 1})}" class="page-link nagoyameshi-page-link">次</a>
+	                                     </li>
+	                                 </ul>
+	                             </nav> 
+	                         </div>                
+                         </div>                          
+                     </div>
+                 </div>  
+             </main>
+             
+             <!-- フッター -->
+             <div th:replace="~{fragment :: footer}"></div>
+         </div>    
+         
+         <div th:replace="~{fragment :: scripts}"></div>  
+   </body>
+ </html>

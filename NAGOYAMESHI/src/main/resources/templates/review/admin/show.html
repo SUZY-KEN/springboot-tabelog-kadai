@@ -26,6 +26,8 @@
 					
 				   
 				   <h1 class="mb-4 text-center">レビュー一覧</h1>
+				   
+				  
 				  
 		<!--検索フォーム-->
 					<div class="d-flex justify-content-between flex-wrap">
@@ -54,8 +56,11 @@
 						
 					</div>
 				   
+					<div th:if="${reviewPage==null}"  class="row justify-content-center" th:text="	お探しの検索結果はありません"> </div>
+					
 		<!--レビュー一覧-->
 				   <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+					
 			            <div th:each="review : ${reviewPage}">
 			                <div class="col">
 			                    <div class="card">
@@ -85,24 +90,26 @@
 					
 			        
 			        <!-- ページネーション -->
-			        <div th:if="${reviewPage.getTotalPages() > 1}" class="d-flex justify-content-center">
-			            <nav aria-label="レビュー一覧ページ">
-			                <ul class="pagination">
-			                    <li class="page-item">
-			                        <span th:if="${reviewPage.isFirst()}" class="page-link disabled">前</span>
-			                        <a th:unless="${reviewPage.isFirst()}" th:href="@{/admin/review/show(page = ${reviewPage.getNumber() - 1},userKeyword=${userKeyword},restaurantKeyword=${restaurantKeyword})}" class="page-link nagoyameshi-page-link">前</a>
-			                    </li>
-			                    <li th:each="i : ${#numbers.sequence(0, reviewPage.getTotalPages() - 1)}" class="page-item">
-			                        <span th:if="${i == reviewPage.getNumber()}" class="page-link active nagoyameshi-active" th:text="${i + 1}"></span>
-			                        <a th:unless="${i == reviewPage.getNumber()}" th:href="@{/admin/review/show(page = ${i},userKeyword=${userKeyword},restaurantKeyword=${restaurantKeyword})}" class="page-link nagoyameshi-page-link" th:text="${i + 1}"></a>
-			                    </li>
-			                    <li class="page-item">                        
-			                        <span th:if="${reviewPage.isLast()}" class="page-link disabled">次</span>
-			                        <a th:unless="${reviewPage.isLast()}" th:href="@{/admin/review/show(page = ${reviewPage.getNumber() + 1},userKeyword=${userKeyword},restaurantKeyword=${restaurantKeyword})}" class="page-link nagoyameshi-page-link">次</a>
-			                    </li>
-			                </ul>
-			            </nav> 
-			        </div>                                                                                 
+					<div th:if="${reviewPage!=null}">
+				        <div th:if="${reviewPage.getTotalPages() > 1}" class="d-flex justify-content-center">
+				            <nav aria-label="レビュー一覧ページ">
+				                <ul class="pagination">
+				                    <li class="page-item">
+				                        <span th:if="${reviewPage.isFirst()}" class="page-link disabled">前</span>
+				                        <a th:unless="${reviewPage.isFirst()}" th:href="@{/admin/review/show(page = ${reviewPage.getNumber() - 1},userKeyword=${userKeyword},restaurantKeyword=${restaurantKeyword})}" class="page-link nagoyameshi-page-link">前</a>
+				                    </li>
+				                    <li th:each="i : ${#numbers.sequence(0, reviewPage.getTotalPages() - 1)}" class="page-item">
+				                        <span th:if="${i == reviewPage.getNumber()}" class="page-link active nagoyameshi-active" th:text="${i + 1}"></span>
+				                        <a th:unless="${i == reviewPage.getNumber()}" th:href="@{/admin/review/show(page = ${i},userKeyword=${userKeyword},restaurantKeyword=${restaurantKeyword})}" class="page-link nagoyameshi-page-link" th:text="${i + 1}"></a>
+				                    </li>
+				                    <li class="page-item">                        
+				                        <span th:if="${reviewPage.isLast()}" class="page-link disabled">次</span>
+				                        <a th:unless="${reviewPage.isLast()}" th:href="@{/admin/review/show(page = ${reviewPage.getNumber() + 1},userKeyword=${userKeyword},restaurantKeyword=${restaurantKeyword})}" class="page-link nagoyameshi-page-link">次</a>
+				                    </li>
+				                </ul>
+				            </nav> 
+				        </div>  
+					</div>                                                                               
 				</div>
 			</div>
 		</main>

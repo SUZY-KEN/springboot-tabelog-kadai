@@ -35,9 +35,9 @@ insert ignore into categories(id,name) values(32,"肉料理");
 
 
 --店舗情報
-insert ignore into restaurants(id,name,price,category_id,description,address,capacity) values (1,"にこにこ食堂",1000,1,"おいしいラーメン提供します。","愛知県名古屋市東区",1);
-insert ignore into restaurants(id,name,price,category_id,description,address,capacity) values (2,"激辛カレー店",2000,2,"辛いカレーを提供します。","愛知県名古屋市西区",3);
-insert ignore into restaurants(id,name,price,category_id,description,address,capacity) values (3,"ラーメン中西",1000,1,"中華ラーメン提供します。","愛知県名古屋市緑区",4);
+insert ignore into restaurants(id,name,price,category_id,description,address,capacity,evalues,evalues_double) values (1,"にこにこ食堂",1000,1,"おいしいラーメン提供します。","愛知県名古屋市東区",1,3,3.0);
+insert ignore into restaurants(id,name,price,category_id,description,address,capacity,evalues,evalues_double) values (2,"激辛カレー店",2000,2,"辛いカレーを提供します。","愛知県名古屋市西区",3,2,2.0);
+insert ignore into restaurants(id,name,price,category_id,description,address,capacity,evalues,evalues_double) values (3,"ラーメン中西",1000,1,"中華ラーメン提供します。","愛知県名古屋市緑区",4,4,4.0);
 insert ignore into restaurants(id,name,price,category_id,description,address,capacity) values (4,"ナマステネパール",2000,2,"本場のカレー提供します。","インド",5);
 insert ignore into restaurants(id,name,price,category_id,description,address,capacity) values (5,"モサバーガー",1500,3,"もさもさのハンバーガーを提供します。","愛知県名古屋市東区",6);
 insert ignore into restaurants(id,name,price,category_id,description,address,capacity) values (6,"ドナルドバーガー",1500,3,"鴨肉バーガーが一押しです。","愛知県名古屋市名東区",1);

@@ -57,7 +57,8 @@ public class AdminUserController {
 	
 //	ユーザー一覧
 	@GetMapping("/show")
-	public String  show(@RequestParam(name="keyword",required = false)String keyword,@AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
+	public String  show(@RequestParam(name="keyword",required = false)String keyword,@RequestParam(name="nameKeyword",required = false)String nameKeyword,
+			@AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
 			@PageableDefault(page=0,size=10,sort="id" )Pageable pageable,Model model) 
 	{
 		Page<Users>userPage;
@@ -68,10 +69,15 @@ public class AdminUserController {
 			userPage=userRepository.findAllByEmailLike("%"+keyword+"%", pageable);
 
 		}
+		else if(nameKeyword!=null&&!nameKeyword.isEmpty())
+		{
+			userPage=userRepository.findAllByNameLike("%"+nameKeyword+"%", pageable);
+		}
 		else
 		{
 			userPage=userRepository.findAll(pageable);
 		}
+		
 		
 		model.addAttribute("userListForm",new UserCSVForm());
 		model.addAttribute("userPage",userPage);

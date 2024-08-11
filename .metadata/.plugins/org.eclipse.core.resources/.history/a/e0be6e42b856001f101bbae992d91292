@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<div th:replace="~{fragment::meta}"></div>
+	<div th:replace="~{fragment::styles}"></div>
+	<title>レビュー管理</title>
+</head>
+
+<body>
+	<div class="nagoyameshi-wrapper">
+		<div th:replace="~{fragment::header}"></div>
+		
+		
+		<main>
+			<div class="container pt-4 pb-5 nagoyameshi-container">			
+				<div class="row justify-content-center">
+	<!--パンくず	-->
+					<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb" class="mb-3">
+			           <ol class="breadcrumb mb-0">                        
+			               <li class="breadcrumb-item"><a th:href="@{/}">ホーム</a></liclass="breadcrumb-item">
+							
+			               <li class="breadcrumb-item" aria-current="page">レビュー管理</li>
+			           </ol>
+			       </nav>     
+					
+				   
+				   <h1 class="mb-4 text-center">レビュー一覧</h1>
+				  
+		<!--検索フォーム-->
+					<div class="d-flex justify-content-between flex-wrap">
+						<div class="mb-3 nagoyameshi-search-form">
+							<form method="get" th:action="@{/admin/review/show}">
+								<div class="input-group">
+									<input class="form-control" type="text" name="userKeyword" th:value="${userKeyword}" placeholder="ユーザー検索">
+									<button type="submit" class="btn text-white shadow-sm nagoyameshi-btn">検索</button>
+								</div>
+							</form>
+							
+						</div>
+						
+						<div class="mb-3 nagoyameshi-search-form">
+							
+							<form method="get" th:action="@{/admin/review/show}">
+								<div class="input-group">
+									<input class="form-control" type="text" name="restaurantKeyword" th:value="${restaurantKeyword}" placeholder="店舗検索">
+									<button type="submit" class="btn text-white shadow-sm nagoyameshi-btn">検索</button>
+								</div>
+							</form>
+							
+							
+						</div>
+						
+						
+					</div>
+				   
+		<!--レビュー一覧-->
+				   <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+			            <div th:each="review : ${reviewPage}">
+			                <div class="col">
+			                    <div class="card">
+			                        <div class="card-body">
+			                            <div class="d-flex justify-content-between">
+			                                <h5 class="card-title" th:text="${review.getUsers().getName()}">
+												<span th:unless="${review.isEnabled()}">
+													非表示状態
+												</span>	
+											</h5>
+											
+				<!--コメント表示切替-->
+											<span th:if="${review.isEnabled()}"><a th:href="@{/admin/review/hidden/__${review.getId()}__}" class="text-danger">非表示</a></span>
+											<span th:unless="${review.isEnabled()}"><a th:href="@{/admin/review/display/__${review.getId()}__}">表示</a></span>
+			                            </div>   
+										<h6 th:text="${review.getRestaurants().getName()}"> </h6>                                           
+			                            <p class="card-text mb-1">
+											<span class="text-warning" th:each="star : ${#numbers.sequence(1, 5)}" th:text="${star <= review.getEvalue()} ? '&#9733;' : '&#9734;'"></span>
+				                         </p>                      
+				                         <p class="card-text"><small class="text-muted" th:text="${#dates.format(review.getCreatedAt(), 'yyyy年MM月dd日')}"></small></p>                              
+				                         <p class="card-text" th:text="${review.getReviewComment()}"></p>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>                                     
+			        </div>    
+					
+			        
+			        <!-- ページネーション -->
+			        <div th:if="${reviewPage.getTotalPages() > 1}" class="d-flex justify-content-center">
+			            <nav aria-label="レビュー一覧ページ">
+			                <ul class="pagination">
+			                    <li class="page-item">
+			                        <span th:if="${reviewPage.isFirst()}" class="page-link disabled">前</span>
+			                        <a th:unless="${reviewPage.isFirst()}" th:href="@{/admin/review/show(page = ${reviewPage.getNumber() - 1},userKeyword=${userKeyword},restaurantKeyword=${restaurantKeyword})}" class="page-link nagoyameshi-page-link">前</a>
+			                    </li>
+			                    <li th:each="i : ${#numbers.sequence(0, reviewPage.getTotalPages() - 1)}" class="page-item">
+			                        <span th:if="${i == reviewPage.getNumber()}" class="page-link active nagoyameshi-active" th:text="${i + 1}"></span>
+			                        <a th:unless="${i == reviewPage.getNumber()}" th:href="@{/admin/review/show(page = ${i},userKeyword=${userKeyword},restaurantKeyword=${restaurantKeyword})}" class="page-link nagoyameshi-page-link" th:text="${i + 1}"></a>
+			                    </li>
+			                    <li class="page-item">                        
+			                        <span th:if="${reviewPage.isLast()}" class="page-link disabled">次</span>
+			                        <a th:unless="${reviewPage.isLast()}" th:href="@{/admin/review/show(page = ${reviewPage.getNumber() + 1},userKeyword=${userKeyword},restaurantKeyword=${restaurantKeyword})}" class="page-link nagoyameshi-page-link">次</a>
+			                    </li>
+			                </ul>
+			            </nav> 
+			        </div>                                                                                 
+				</div>
+			</div>
+		</main>
+		
+		
+		<div th:replace="~{fragment::footer}"></div>
+	</div>
+	<div th:replace="~{fragment::scripts}"></div>
+	
+</body>
+</html>

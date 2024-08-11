@@ -34,12 +34,21 @@
 				  	
 							  <div class="d-flex justify-content-between flex-wrap mb-4">
 								<!--会員検索-->
-								<form method="get" th:action="@{/admin/user/show}">
-									<div class="input-group">
-										<input class="form-control" type="text"name="keyword" th:value="${keyword}"  placeholder="メールアドレスのキーワード">
-										<button type="submit" class="btn text-white shadow-sm nagoyameshi-btn " >検索</button>
-									</div>
-								</form>
+								<div class="d-flex justify-content-between flex-wrap mb-4">
+									<form method="get" th:action="@{/admin/user/show}">
+										<div class="input-group">
+											<input class="form-control" type="text"name="keyword" th:value="${keyword}"  placeholder="メールアドレスのキーワード">
+											<button type="submit" class="btn text-white shadow-sm nagoyameshi-btn " >検索</button>
+										</div>
+									</form>
+									
+									<form method="get" th:action="@{/admin/user/show}">
+										<div class="input-group mx-3">
+											<input class="form-control" type="text"name="nameKeyword" th:value="${nameKeyword}"  placeholder="名前のキーワード">
+											<button type="submit" class="btn text-white shadow-sm nagoyameshi-btn " >検索</button>
+										</div>
+									</form>
+								</div>
 								
 								<!--全ページ会員情報出力-->
 								 <form  method="post" th:action="@{/admin/user/download}" th:object="${userListForm}">
